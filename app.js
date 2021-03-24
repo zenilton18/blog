@@ -10,7 +10,6 @@ const { getPriority } = require('node:os')
 
 //rotas
 //
-teddgfd
 //outros
 const PORT= 8081
 app.listen(PORT,()=>{
