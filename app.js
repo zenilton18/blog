@@ -1,18 +1,20 @@
+
 //carregando modulos
-const express = require('express')
-const handlebars = require('express-handlebars')
-const bodyParser = require("body-parser")
+    const express = require('express')
+    const handlebars = require('express-handlebars')
+    const bodyParser = require("body-parser")
 const { getPriority } = require('node:os')
-const app = express()
-//const mongoose = require ('mongoose')
+    const app = express()
+    //const mongoose = require ('mongoose')
 //config
 
 //rotas
 //
+teddgfd
 //outros
 const PORT= 8081
 app.listen(PORT,()=>{
-console.log("servidor rodando na porta:"+PORT)
+    console.log("servidor rodando na porta:"+PORT)
 })
 
 const mongoose = require("mongoose")
@@ -49,6 +51,7 @@ const usuarioSchema = mongoose.Schema({
     
 })
 //collection
+
 mongoose.model('usuarios', usuarioSchema)
 
 const zenilton = mongoose.model('usuarios')
@@ -63,3 +66,18 @@ new zenilton({
 }).catch(()=>{
     console.log("ero ao cadastrar")
 })
+
+    mongoose.model('usuarios', usuarioSchema)
+
+    const zenilton = mongoose.model('usuarios')
+
+    new zenilton({
+        nome: "zenilton",
+        sobrenome:"sousa",
+        email:"ze18.fv@gmail.com",
+        idade:23
+    }).save().then(()=>{
+        console.log("cadastrado com sucesso ")
+    }).catch(()=>{
+        console.log("ero ao cadastrar")
+    })
