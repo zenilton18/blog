@@ -12,4 +12,4 @@ router.get('/',(req, res)=>{
   router.get('/categoria', (req,res)=>{
     res.send("categorias")
 })
-module.exports = router
+module.exports = router 
