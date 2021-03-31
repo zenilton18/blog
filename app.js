@@ -7,7 +7,7 @@
     const path= require ("path")
 
     const app = express()
-    //const mongoose = require ('mongoose')
+    const mongoose = require ('mongoose')
 //config  
     //body-parser
     app.use(bodyParser.urlencoded({extended:true}))
@@ -15,6 +15,13 @@
     //handlebars
     app.engine('handlebars', handlebars({defaultLayout: 'main'}))
     app.set('view engine', 'handlebars')
+    //mongoose
+    mongoose.Promise= global.Promise;
+    mongoose.connect("mongodb://localhost/blogapp").then(()=>{
+        console.log("conectado ao mongo ")
+    }).catch((erro)=>{
+        console.log("erro "+erro)
+    })
 //public
     app.use(express.static(path.join(__dirname,"public")))
 //rotas
