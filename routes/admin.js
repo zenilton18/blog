@@ -23,7 +23,7 @@ router.get('/',(req, res)=>{
 
    const novaCategoria={
         nome: req.body.nome,
-      slug: req.body.slug
+        slug: req.body.slug
 
     }
     new Categoria(novaCategoria).save().then(()=>{

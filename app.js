@@ -5,7 +5,6 @@
     const bodyParser = require("body-parser")
     const admin = require("./routes/admin")
     const path= require ("path")
-
     const app = express()
     const mongoose = require ('mongoose')
 //config  
@@ -17,7 +16,7 @@
     app.set('view engine', 'handlebars')
     //mongoose
     mongoose.Promise= global.Promise;
-    mongoose.connect("mongodb://localhost/blogapp").then(()=>{
+    mongoose.connect("mongodb://localhost/blogapp",{useNewUrlParser: true, useUnifiedTopology: true}).then(()=>{
         console.log("conectado ao mongo ")
     }).catch((erro)=>{
         console.log("erro "+erro)
