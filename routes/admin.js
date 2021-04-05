@@ -13,7 +13,15 @@ router.get('/',(req, res)=>{
   })
 
   router.get('/categorias', (req,res)=>{
-    res.render("admin/categorias")
+    Categoria.find().lean().sort({date:'desc'}).then((categorias)=>{
+        res.render("admin/categorias" , {categorias: categorias}).catch((err)=>{
+            req.flash("error_msg" , "erro ao listar categorias ")
+
+            res.redirect("/admin")
+            
+        })  
+    })
+   
 })
  router.get("/categoria/add",(req,res)=>{
      res.render("admin/addcategoria")
@@ -55,6 +63,11 @@ router.get('/',(req, res)=>{
 
      }
   
+
+  })
+
+  router.get("/categorias/edit/:id",(req,res)=>{
+      res.send("estou aki ")
 
   })
 module.exports = router 
