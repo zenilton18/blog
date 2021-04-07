@@ -67,7 +67,7 @@ router.get('/',(req, res)=>{
   })
 
   router.get("/categorias/edit/:id",(req,res)=>{
-      res.send("estou aki kkkkkkk ")
+      res.send("estou aki  ")
 
   })
 module.exports = router 
