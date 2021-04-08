@@ -47,21 +47,7 @@ router.get('/',(req, res)=>{
          res.render("admin/addcategoria",{erros: erros })
      }
      else{
-        const novaCategoria={
-            nome: req.body.nome,
-            slug: req.body.slug
-    
-        }
-        new Categoria(novaCategoria).save().then(()=>{
-            req.flash("success_msg","Mensagem salva com Sucesso ")
-          res.redirect("/admin/categorias")
-        }).catch((erro)=>{
-            req.flash("error_msg","Erro ao Salvar,Tente novamente mais tarde !")
-
-            res.redirect("/admin")
-        })
-
-     }
+       
   
 
   })
