@@ -66,15 +66,21 @@ router.get('/',(req, res)=>{
 
   })
 
-  router.get("/categorias/edit/:id",(req,res)=>{
-      Categoria.findOne({_id: req.params.id}).lean().then((categoria)=>{
-        res.render("admin/editcategorias", {categoria:categoria})
-      }).catch((erro)=>{
-        req.flash("error_msg","essa categoria nao existe!")
+  
 
-        res.redirect("/admin/categorias")
+    router.get("/categorias/edit/:id",(req,res)=>{
+        Categoria.findOne({_id : req.parms.id}).lean().then((categoria)=>{
+        res.render("admin/editcategorias", {categoria:categoria})  
+        }).catch((erro)=>{
+            req.flash("error_msg","essa categoria nao existe!")
+
+            res.redirect("/admin/categorias")
+        })  
+        
     })
       
 
   })
+
+  
 module.exports = router 
