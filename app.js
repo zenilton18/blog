@@ -9,7 +9,16 @@
     const mongoose = require ('mongoose')
     const session = require ("express-session")
     const flash = require ("connect-flash")
-//con
+//config  
+    //body-parser
+    //sessão
+    app.use(session({
+        secret:"cursonode",
+        resave:true,
+        saveUninitialized:true
+    }))
+    app.use(flash())
+    //middleware
     app.use((req,res,next)=>{
         res.locals.success_msg =req.flash("success_msg")
         res.locals.error_msg = req.flash("error_msg")
