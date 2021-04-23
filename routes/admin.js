@@ -90,10 +90,10 @@ router.get('/',(req, res)=>{
             categoria.nome= req.body.nome
             categoria.slug= req.body.slug
         categoria.save().then(()=>{
-            req.flash("success_msg", "salvo com sucesso")
+            req.flash("success_msg", "msg editada  com sucesso")
             res.redirect("/admin/categorias")
         }).catch((erro)=>{
-            req.flash("error_msg","erro interno  editar ")
+            req.flash("error_msg","erro interno ao editar ")
             res.redirect("/admin/categorias")
         })
 
@@ -102,6 +102,18 @@ router.get('/',(req, res)=>{
             res.redirect("/admin/categorias")
         })
  })
+
+  router.post("/categorias/deletar",(req,res)=>{
+
+    Categoria.deleteOne({_id: req.body.id}).then(()=>{
+        req.flash("success_msg","categoria deletada com sucesso ")
+        res.redirect("/admin/categorias")
+    }).catch((erro)=>{
+        req.flash("erro_msg","erro ao deletar ")
+        res.redirect("/admin/categorias")
+
+    })
+  })
 
 
 module.exports = router 
