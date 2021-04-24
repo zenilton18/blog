@@ -1,4 +1,4 @@
-@ -0,0 +1,36 @@
+
 const { Mongoose } = require("mongoose");
 const mongose = require ("mongose") 
 const Schema = mongose.Shema;
