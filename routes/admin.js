@@ -4,9 +4,9 @@ const mongoose= require("mongoose")
 require("../models/Categoria")
 const Categoria= mongoose.model("categorias")
 
-router.get('/',(req, res)=>{
-    res.render('admin/index')
-})
+    router.get('/',(req, res)=>{
+        res.render('admin/index')
+    })
 
   router.get('/post', (req,res)=>{
       res.render("admin/index")
@@ -24,13 +24,13 @@ router.get('/',(req, res)=>{
         })  
     })
    
- router.get("/categoria/add",(req,res)=>{
+    router.get("/categoria/add",(req,res)=>{
      res.render("admin/addcategoria")
 
- })
- router.post("/categorias/nova", (req,res)=>{
+    })
+    router.post("/categorias/nova", (req,res)=>{
 
-    var erros=[]
+        var erros=[]
 
         if(!req.body.nome ||typeof req.body.nome == undefined || req.body.slug==null){
 
@@ -65,13 +65,8 @@ router.get('/',(req, res)=>{
 
                 res.redirect("/admin")
             })
-
-    }
-  
-
-  })
-
-  
+            }
+    })
 
     router.get("/categorias/edit/:id",(req,res)=>{
         Categoria.findOne({_id : req.params.id}).lean().then((categoria)=>{
@@ -85,7 +80,7 @@ router.get('/',(req, res)=>{
     })
       
 
- router.post("/categorias/edit",(req,res)=>{
+    router.post("/categorias/edit",(req,res)=>{
         Categoria.findOne({_id: req.body.id}).then((categoria)=>{
             categoria.nome= req.body.nome
             categoria.slug= req.body.slug
@@ -101,9 +96,9 @@ router.get('/',(req, res)=>{
             req.flash("error_msg","erro ao editar ")
             res.redirect("/admin/categorias")
         })
- })
+    })
 
-  router.post("/categorias/deletar",(req,res)=>{
+    router.post("/categorias/deletar",(req,res)=>{
 
     Categoria.deleteOne({_id: req.body.id}).then(()=>{
         req.flash("success_msg","categoria deletada com sucesso ")
@@ -112,8 +107,15 @@ router.get('/',(req, res)=>{
         req.flash("erro_msg","erro ao deletar ")
         res.redirect("/admin/categorias")
 
+        })
     })
-  })
+    router.get("/postagens",(req,res)=>{
+        res.render("admin/postagens")
+    })
+    router.get("/postagens/add",(req,res)=>{
+        res.render("admin/addpostagem")
+    })
+
 
 
 module.exports = router 
