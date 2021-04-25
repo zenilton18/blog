@@ -104,7 +104,7 @@ const Categoria= mongoose.model("categorias")
         req.flash("success_msg","categoria deletada com sucesso ")
         res.redirect("/admin/categorias")
     }).catch((erro)=>{
-        req.flash("erro_msg","erro ao deletar ")
+        req.flash("error_msg","erro ao deletar ")
         res.redirect("/admin/categorias")
 
         })
@@ -112,8 +112,18 @@ const Categoria= mongoose.model("categorias")
     router.get("/postagens",(req,res)=>{
         res.render("admin/postagens")
     })
+    
+
+
     router.get("/postagens/add",(req,res)=>{
-        res.render("admin/addpostagem")
+        Categoria.find().lean().then((categorias)=>{
+            res.render("admin/addpostagem",{categorias:categorias})
+        }).catch((erro)=>{
+            req.flash("error_msg", "erro ao carregar formulario")
+            res.redirect("/admin")
+            
+        })
+
     })
 
 
