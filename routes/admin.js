@@ -128,4 +128,4 @@ const Categoria= mongoose.model("categorias")
 
 
 
- 
+module.exports = router 
