@@ -37,3 +37,12 @@
         console.log("erro "+erro)
     })
 //public
+    app.use(express.static(path.join(__dirname,"public")))
+//rotas
+    app.use('/admin', admin)
+//outros
+const PORT= 8081
+app.listen(PORT,()=>{
+    console.log("servidor rodando na porta:"+ PORT)
+})
+
