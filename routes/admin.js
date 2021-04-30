@@ -3,6 +3,9 @@ const router = express.Router()
 const mongoose= require("mongoose")
 require("../models/Categoria")
 const Categoria= mongoose.model("categorias")
+require("../models/Postagem")
+const Postagem = mongoose.model("postagens")
+
 
     router.get('/',(req, res)=>{
         res.render('admin/index')
@@ -123,6 +126,17 @@ const Categoria= mongoose.model("categorias")
             res.redirect("/admin")
             
         })
+
+    })
+    router.post("/postagem/nova",(req,res)=>{
+
+        const novapostagem={
+            titulo : req.body.titulo,
+            slug : req.body.slug
+
+        }
+
+        new Postagem(novapostagem).save()
 
     })
 

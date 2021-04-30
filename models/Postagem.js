@@ -1,7 +1,5 @@
-
-const { Mongoose } = require("mongoose");
-const mongose = require ("mongose") 
-const Schema = mongose.Shema;
+const mongoose = require ("mongoose");
+const Schema= mongoose.Schema;
 
 const Postagem = new Schema ({
 
