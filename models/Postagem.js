@@ -1,4 +1,4 @@
-const mongoose = require ("mongoose");
+const mongoose= require("mongoose")
 const Schema= mongoose.Schema;
 
 const Postagem = new Schema ({
@@ -32,4 +32,4 @@ const Postagem = new Schema ({
 
     
 })
-Mongoose.model("postagens", Postagem)
+mongoose.model("postagens", Postagem)
