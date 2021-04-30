@@ -4,6 +4,7 @@ const mongoose= require("mongoose")
 require("../models/Categoria")
 const Categoria= mongoose.model("categorias")
 require("../models/Postagem")
+const Postagem =mongoose.model("postagens")
 
 
 
@@ -130,7 +131,7 @@ require("../models/Postagem")
         })
 
     })
-    router.post("/postagem/nova",(req,res)=>{
+    router.post("/postagens/nova",(req,res)=>{
 
         const novapostagem={
             titulo : req.body.titulo,
