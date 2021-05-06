@@ -15,4 +15,17 @@
             <input type="text" name="slug" class="form-control">
             <label for="descricao">Descriçao</label>
             <input type="text" name="descricao" class="form-control">
-            <label
+            <label for="conteudo">Conteudo</label>
+            <textarea name="conteudo" class="form-control"></textarea>
+            <label for="categorias">Categorias</label>
+            <select name="categorias" class="form-select">
+                {{#each categorias}}
+                <option value="{{_id}}">{{nome}}</option>
+                {{else}}
+                <option value="0">Nenhuma categoria</option>
+                {{/each}}
+            </select>
+            <button type="submit" class="btn btn-success mt-2"  >Criar Postagem</button>
+        </form>
+    </div>
+</div>
