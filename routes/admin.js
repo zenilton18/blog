@@ -58,7 +58,7 @@ const Postagem =mongoose.model("postagens")
 
         
             else{
-            const novaCategoria={
+            const novaCategoria={ 
                 nome: req.body.nome,
                 slug: req.body.slug
         
@@ -133,13 +133,18 @@ const Postagem =mongoose.model("postagens")
     })
     router.post("/postagens/nova",(req,res)=>{
 
-        const novapostagem={
-            titulo : req.body.titulo,
-            slug : req.body.slug
+       var  erros= []
+       if(req.body.categoria== "0"){
+           erros.push({texto: "registre 1 categoria"})
+       }
+       if(erros.length > 0){
+           res.render("admin/addpostagem",{erros:erros})
 
-        }
+       }else{}
 
-        new Postagem(novapostagem).save()
+
+
+        
 
     })
 
