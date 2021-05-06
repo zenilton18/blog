@@ -133,6 +133,7 @@ const Postagem =mongoose.model("postagens")
     })
     router.post("/postagens/nova",(req,res)=>{
 
+
        var  erros= []
        if(req.body.categoria== "0"){
            erros.push({texto: "registre 1 categoria"})
@@ -140,13 +141,31 @@ const Postagem =mongoose.model("postagens")
        if(erros.length > 0){
            res.render("admin/addpostagem",{erros:erros})
 
-       }else{}
+       }else{
+            const novaPostagem={ 
+            titulo: req.body.titulo,
+            descricao:req.body.descricao,
+            conteudo :req.body.conteudo,
+            categoria:req.body.categoria,
+            slug:req.body.slug
+        
+            }
+            new Postagem(novaPostagem).save().then(()=>{
+                req.flash("success_msg","Mensagem salva com Sucesso ")
+            res.redirect("/admin/postagens")
+            }).catch((erro)=>{
+                req.flash("error_msg","Erro ao Salvar,Tente novamente mais tarde !")
+
+                res.redirect("/admin/postagens")
+            })
+            }
+    })
 
 
 
         
 
-    })
+    
 
 
 
