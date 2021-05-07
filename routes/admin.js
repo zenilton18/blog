@@ -146,7 +146,7 @@ const Postagem =mongoose.model("postagens")
             titulo: req.body.titulo,
             descricao:req.body.descricao,
             conteudo :req.body.conteudo,
-            categoria:req.body.categoria,
+            categoria:req.body.categorias,
             slug:req.body.slug
         
             }
