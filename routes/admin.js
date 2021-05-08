@@ -116,7 +116,13 @@ const Postagem =mongoose.model("postagens")
         })
     })
     router.get("/postagens",(req,res)=>{
-        res.render("admin/postagens")
+        Postagem.find().lean().populate("categoria").sort({date:"desc"}).then((postagens)=>{
+            res.render("admin/postagens",{postagens:postagens})
+        }).catch((erro)=>{
+            req.flash("error_msg","erro ao listar postagens")
+            res.render("admin/postagens")
+        })  
+        
     })
     
 
