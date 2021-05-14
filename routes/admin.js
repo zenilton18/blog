@@ -98,10 +98,7 @@ const Postagem =mongoose.model("postagens")
             res.redirect("/admin/categorias")
         })
 
-        }).catch((erro)=>{
-            req.flash("error_msg","erro ao editar ")
-            res.redirect("/admin/categorias")
-        })
+        }) 
     })
 
     router.post("/categorias/deletar",(req,res)=>{
@@ -166,6 +163,26 @@ const Postagem =mongoose.model("postagens")
             })
             }
     })
+    
+    router.get("/postagens/edit/:id",(req,res)=>{
+        Postagem.findOne({id: req.params.body}).lean().then((postagem)=>{
+            Categoria.find().lean().then((categorias)=>{
+                res.render("admin/editpostagens", {categorias:categorias, postagem:postagem})
+
+            }).catch((error)=>{
+                req.flash("error_msg","erro ao encontar categoria ")
+                res.redirect("/admin/postagens")
+            })
+
+        }).catch((erro)=>{
+            req.flash("error_msg","erro ao carregar formulario de ediçao ")
+            res.redirect("/admin/postagens")
+        })
+
+        
+    })
+
+
 
 
 
