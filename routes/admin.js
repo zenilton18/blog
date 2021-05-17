@@ -78,26 +78,7 @@ const Postagem =mongoose.model("postagens")
         Categoria.findOne({_id : req.params.id}).lean().then((categoria)=>{
         res.render("admin/editcategorias", {categoria:categoria})  
         }).catch((erro)=>{
-            req.flash("error_msg","essa categoria nao existe!")
-
-            res.redirect("/admin/categorias")
-        })  
-        
-    })
-      
-
-    router.post("/categorias/edit",(req,res)=>{
-        Categoria.findOne({_id: req.body.id}).then((categoria)=>{
-            categoria.nome= req.body.nome
-            categoria.slug= req.body.slug
-        categoria.save().then(()=>{
-            req.flash("success_msg", "msg editada  com sucesso")
-            res.redirect("/admin/categorias")
-        }).catch((erro)=>{
-            req.flash("error_msg","erro interno ao editar ")
-            res.redirect("/admin/categorias")
-        })
-
+            req.flas
         }) 
     })
 
