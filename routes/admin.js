@@ -182,10 +182,26 @@ const Postagem =mongoose.model("postagens")
         
     })
     router.post("/postagem/edit",(req,res)=>{
-        Postagem.findOne({_id: req.body.id}).lean().then((postagem)=>{
+        Postagem.findOne({_id: req.body.id}).then((postagem)=>{
+            Postagem.titulo= req.body.titulo,
+            Postagem.descricao=req.body.descricao,
+            Postagem.conteudo =req.body.conteudo,
+            Postagem.categoria=req.body.categorias,
+            Postagem.slug=req.body.slug
+
+            postagem.save().then(()=>{
+                req.flash("success_msg","categoria editada com sucesso ")
+                res.redirect("/admin/postagens")
+            }).catch((erro)=>{
+                req.flash("error_msg","erro interno")
+                res.redirect("/admin/postagens")
+            })
+
+            postagem.save().then()
 
         }).catch((erro)=>{
-            req.flash("error_msg","erro ao editar postagem")
+            console.log(erro)
+            req.flash("error_msg","erro ao salvar ediçao")
             res.redirect("/admin/postagens")
         })
 
