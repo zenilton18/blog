@@ -10,13 +10,13 @@
         <h4>Editar Postagem:</h4>
         <form action="/admin/postagens/edit" method="POST">
             <label for="titulo">Título</label>
-            <input type="text" name="titulo" class="form-control">
+            <input type="text" name="titulo" value="{{postagem.titulo}}" class="form-control">
             <label for="slug">Slug</label>
-            <input type="text" name="slug" class="form-control">
+            <input type="text" name="slug"  value="{{postagem.slug}}"class="form-control">
             <label for="descricao">Descriçao</label>
-            <input type="text" name="descricao" class="form-control">
+            <input type="text" name="descricao"  value="{{postagem.descricao}}"class="form-control">
             <label for="conteudo">Conteudo</label>
-            <textarea name="conteudo" class="form-control"></textarea>
+            <textarea name="conteudo" class="form-control"  >{{postagem.conteudo}}</textarea>
             <label for="categorias">Categorias</label>
             <select name="categorias" class="form-select">
                 {{#each categorias}}
