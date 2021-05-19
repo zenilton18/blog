@@ -8,7 +8,8 @@
 <div class="card">
     <div class="card-body">
         <h4>Editar Postagem:</h4>
-        <form action="/admin/postagens/edit" method="POST">
+        <form action="/admin/postagem/edit" method="POST">
+            <input type="hidden" name="id">
             <label for="titulo">Título</label>
             <input type="text" name="titulo" value="{{postagem.titulo}}" class="form-control">
             <label for="slug">Slug</label>

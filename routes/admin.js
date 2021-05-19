@@ -181,6 +181,15 @@ const Postagem =mongoose.model("postagens")
 
         
     })
+    router.post("/postagem/edit",(req,res)=>{
+        Postagem.findOne({_id: req.body.id}).lean().then((postagem)=>{
+
+        }).catch((erro)=>{
+            req.flash("error_msg","erro ao editar postagem")
+            res.redirect("/admin/postagens")
+        })
+
+    })
 
 
 
