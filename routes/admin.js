@@ -52,6 +52,15 @@ const Postagem =mongoose.model("postagens")
             erros.push({texto:"nome pequeno "})
         }
 
+        if (erros.length >0){
+            res.render("admin/addcategoria",{erros: erros })
+        }
+
+        
+            else{
+            const novaCategoria={ 
+                nome: req.body.nome,
+                slug: req.body.slug
         
             }
             new Categoria(novaCategoria).save().then(()=>{
