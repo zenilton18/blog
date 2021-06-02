@@ -1,5 +1,26 @@
 const express = require("express")
-c
+const router = express.Router()
+const mongoose= require("mongoose")
+require("../models/Categoria")
+const Categoria= mongoose.model("categorias")
+require("../models/Postagem")
+const Postagem =mongoose.model("postagens")
+
+
+
+
+
+    router.get('/',(req, res)=>{
+        res.render('admin/index')
+    })
+
+  router.get('/post', (req,res)=>{
+      res.render("admin/index")
+  })
+
+  router.get('/categorias', (req,res)=>{
+    Categoria.find().lean().sort({date:'desc'}).then((categorias)=>{
+        res.render("admin/categorias" , {categorias: categorias})
 
     }).catch((erro)=>{
             req.flash("error_msg" , "erro ao listar categorias ")
