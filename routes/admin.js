@@ -145,7 +145,21 @@ const Postagem =mongoose.model("postagens")
            res.render("admin/addpostagem",{erros:erros})
 
        }else{
-            co
+            const novaPostagem={ 
+            titulo: req.body.titulo,
+            descricao:req.body.descricao,
+            conteudo :req.body.conteudo,
+            categoria:req.body.categorias,
+            slug:req.body.slug
+        
+            }
+            new Postagem(novaPostagem).save().then(()=>{
+                req.flash("success_msg","Mensagem salva com Sucesso ")
+            res.redirect("/admin/postagens")
+            }).catch((erro)=>{
+                req.flash("error_msg","Erro ao Salvar,Tente novamente mais tarde !")
+
+                res.redirect("/admin/postagens")
             })
             }
     })
