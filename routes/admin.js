@@ -141,26 +141,6 @@ const Postagem =mongoose.model("postagens")
        if(req.body.categoria== "0"){
            erros.push({texto: "registre 1 categoria"})
        }
-       if(erros.length > 0){
-           res.render("admin/addpostagem",{erros:erros})
-
-       }else{
-            const novaPostagem={ 
-            titulo: req.body.titulo,
-            descricao:req.body.descricao,
-            conteudo :req.body.conteudo,
-            categoria:req.body.categorias,
-            slug:req.body.slug
-        
-            }
-            new Postagem(novaPostagem).save().then(()=>{
-                req.flash("success_msg","Mensagem salva com Sucesso ")
-            res.redirect("/admin/postagens")
-            }).catch((erro)=>{
-                req.flash("error_msg","Erro ao Salvar,Tente novamente mais tarde !")
-
-                res.redirect("/admin/postagens")
-            })
             }
     })
     
