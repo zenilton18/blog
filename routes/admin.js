@@ -172,7 +172,39 @@ const Postagem =mongoose.model("postagens")
             }).catch((error)=>{
                 req.flash("error_msg","erro ao encontar categoria ")
                 res.redirect("/admin/postagens")
-          
+            })
+
+        }).catch((erro)=>{
+            req.flash("error_msg","erro ao carregar formulario de ediçao ")
+            res.redirect("/admin/postagens")
+        })
+
+        
+    })
+    router.post("/postagem/edit",(req,res)=>{
+        Postagem.findOne({_id: req.body.id}).then((postagem)=>{
+            Postagem.titulo= req.body.titulo,
+            Postagem.descricao=req.body.descricao,
+            Postagem.conteudo =req.body.conteudo,
+            Postagem.categoria=req.body.categorias,
+            Postagem.slug=req.body.slug
+
+            postagem.save().then(()=>{
+                req.flash("success_msg","categoria editada com sucesso ")
+                res.redirect("/admin/postagens")
+            }).catch((erro)=>{
+                req.flash("error_msg","erro interno")
+                res.redirect("/admin/postagens")
+            })
+
+            postagem.save().then()
+
+        }).catch((erro)=>{
+            console.log(erro)
+            req.flash("error_msg","erro ao salvar ediçao")
+            res.redirect("/admin/postagens")
+        })
+
     })
 
 
