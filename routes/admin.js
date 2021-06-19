@@ -112,7 +112,106 @@ const Postagem =mongoose.model("postagens")
 
         })
     })
-   
+    router.get("/postagens",(req,res)=>{
+        Postagem.find().lean().populate("categoria").sort({date:"desc"}).then((postagens)=>{
+            res.render("admin/postagens",{postagens:postagens})
+        }).catch((erro)=>{
+            req.flash("error_msg","erro ao listar postagens")
+            res.render("admin/postagens")
+        })  
+        
+    })
+    
+
+
+    router.get("/postagens/add",(req,res)=>{
+        Categoria.find().lean().then((categorias)=>{
+            res.render("admin/addpostagem",{categorias:categorias})
+        }).catch((erro)=>{
+            req.flash("error_msg", "erro ao carregar formulario")
+            res.redirect("/admin")
+            
+        })
+
+    })
+    router.post("/postagens/nova",(req,res)=>{
+
+
+       var  erros= []
+       if(req.body.categoria== "0"){
+           erros.push({texto: "registre 1 categoria"})
+       }
+       if(erros.length > 0){
+        res.render("admin/addpostagem",{erros:erros})
+
+        }else{
+         const novaPostagem={ 
+         titulo: req.body.titulo,
+         descricao:req.body.descricao,
+         conteudo :req.body.conteudo,
+         categoria:req.body.categorias,
+         slug:req.body.slug
+     
+         }
+         new Postagem(novaPostagem).save().then(()=>{
+             req.flash("success_msg","Mensagem salva com Sucesso ")
+         res.redirect("/admin/postagens")
+         }).catch((erro)=>{
+             req.flash("error_msg","Erro ao Salvar,Tente novamente mais tarde !")
+
+             res.redirect("/admin/postagens")
+         })
+            }
+    })
+    
+    router.get("/postagens/edit/:id",(req,res)=>{
+        Postagem.findOne({id: req.params.body}).lean().then((postagem)=>{
+            Categoria.find().lean().then((categorias)=>{
+                res.render("admin/editpostagens", {categorias:categorias, postagem:postagem})
+
+            }).catch((error)=>{
+                req.flash("error_msg","erro ao encontar categoria ")
+                res.redirect("/admin/postagens")
+            })
+
+        }).catch((erro)=>{
+            req.flash("error_msg","erro ao carregar formulario de ediçao ")
+            res.redirect("/admin/postagens")
+        })
+
+        
+    })
+    router.post("/postagem/edit",(req,res)=>{
+        Postagem.findOne({_id: req.body.id}).then((postagem)=>{
+            Postagem.titulo= req.body.titulo,
+            Postagem.descricao=req.body.descricao,
+            Postagem.conteudo =req.body.conteudo,
+            Postagem.categoria=req.body.categorias,
+            Postagem.slug=req.body.slug
+
+            postagem.save().then(()=>{
+                req.flash("success_msg","categoria editada com sucesso ")
+                res.redirect("/admin/postagens")
+            }).catch((erro)=>{
+                req.flash("error_msg","erro interno")
+                res.redirect("/admin/postagens")
+            })
+
+            postagem.save().then()
+
+        }).catch((erro)=>{
+            console.log(erro)
+            req.flash("error_msg","erro ao salvar ediçao")
+            res.redirect("/admin/postagens")
+        })
+
+    })
+
+
+
+
+
+        
 
     
 
